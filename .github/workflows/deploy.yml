@@ -1,5 +1,4 @@
 name: Build Hexo Blog
-
 on:
   push:
     branches: [ main ]
@@ -18,12 +17,28 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+      
+      - name: Hexo clean
+        run: npx hexo clean
 
-      - name: Build Hexo
-        run: npx hexo clean && npx hexo generate
+      - name: Hexo generate
+        run: npx hexo generate
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
