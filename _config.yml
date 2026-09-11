@@ -11,7 +11,7 @@ permalink: :year/:month/:day/:title/
 
 source_dir: source
 public_dir: public
-theme: landscape
+theme: 
 
 index_generator:
   path: ''
