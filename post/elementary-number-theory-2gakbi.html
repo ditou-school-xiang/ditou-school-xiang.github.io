@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>初等数论 | 我的博客</title><meta name="author" content="ditou-school-xiang"><meta name="copyright" content="ditou-school-xiang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="初等数论（求和符号在电脑上实在难以补充完整，故只能省略上下两部分简略写成Σ） 前置理解基础： 1.整除：a&#x3D;bq（q为整数），简写为b|a，读作b整除a；这里可以理解为用b可以去分割a 2.互素：整数中最大公因数GCD为1即（a1,a2,….an）&#x3D;1,则a1,a2….an互素 最小公倍数LCM【a1,a2,….an】 3.a&#x3D;bq+c，移c&#x3D;a-bq,换a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初等数论">
+<meta property="og:url" content="https://ditou-school-xiang.github.io/post/elementary-number-theory-2gakbi.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="初等数论（求和符号在电脑上实在难以补充完整，故只能省略上下两部分简略写成Σ） 前置理解基础： 1.整除：a&#x3D;bq（q为整数），简写为b|a，读作b整除a；这里可以理解为用b可以去分割a 2.互素：整数中最大公因数GCD为1即（a1,a2,….an）&#x3D;1,则a1,a2….an互素 最小公倍数LCM【a1,a2,….an】 3.a&#x3D;bq+c，移c&#x3D;a-bq,换a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ditou-school-xiang.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-09-19T12:57:15.000Z">
+<meta property="article:modified_time" content="2026-09-26T13:29:17.000Z">
+<meta property="article:author" content="ditou-school-xiang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ditou-school-xiang.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "初等数论",
+  "url": "https://ditou-school-xiang.github.io/post/elementary-number-theory-2gakbi.html",
+  "image": "https://ditou-school-xiang.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-09-19T12:57:15.000Z",
+  "dateModified": "2026-09-26T13:29:17.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "ditou-school-xiang",
+      "url": "https://ditou-school-xiang.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ditou-school-xiang.github.io/post/elementary-number-theory-2gakbi.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '初等数论',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">初等数论</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">初等数论</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-09-19T12:57:15.000Z" title="发表于 2026-09-19 20:57:15">2026-09-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-09-26T13:29:17.000Z" title="更新于 2026-09-26 21:29:17">2026-09-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="初等数论"><a href="#初等数论" class="headerlink" title="初等数论"></a>初等数论</h1><p>（求和符号在电脑上实在难以补充完整，故只能省略上下两部分简略写成Σ）</p>
+<p><em>前置理解基础：</em></p>
+<p>1.整除：a&#x3D;bq（q为整数），简写为b|a，读作b整除a；这里可以理解为用b可以去分割a</p>
+<p>2.互素：整数中最大公因数GCD为1即（a1,a2,….an）&#x3D;1,则a1,a2….an互素</p>
+<p>最小公倍数LCM【a1,a2,….an】</p>
+<p>3.a&#x3D;bq+c，移c&#x3D;a-bq,换a为b，之后则可以得到一个新的式子即c&#x3D;b<em>p+r则可求得(a,b)&#x3D;(b,c)，举数字说明（100，36）&#x3D;（36，28）：100&#x3D;36</em>* 2+28，36&#x3D;28*<em>1+8，28&#x3D;8</em>3+4，8&#x3D;4<em>2，也可以用生活化的例子去理解，将长为100宽为36的蛋糕切成尽可能大的等大的小正方形（也就是求100和36的最大公因数），那就先用2个边长为36的大正方形占据，剩下一个长为36宽为28的长方形，再用一个边长为28的大正方形占，剩下一个8</em>28的长方形，接着用3个边长为8的正方形，剩下4*8的长方形，恰好可以分成2个边长为4的正方形，于是将以上所有的大正方形切分为边长为4的小正方形，由此例子可以说明为什么会这样做</p>
+<p>辗转相除法：运用3来<u><strong>化大为小，便于计算</strong></u>​<u>（余数r逐渐减小至0）</u>可以快速求出两个正整数的最大公因数。例如，（a,b）&#x3D;(b,c)&#x3D;……….&#x3D;（e，m）&#x3D;(m,n),<u>当e&#x3D;ml+n，m&#x3D;nq即没有余数，就说明恰好找到最大公因数n</u>（至于为什么不是q，因为无法确保q是n的因数），也就可以总结为（a,b）&#x3D;n</p>
+<p>4.A<sub>a1a2…ak</sub>x<sub>1</sub>​<sup>a1</sup>x<sub>2</sub>​<sup>a2</sup>…x<sub>k</sub>​<sup>ak</sup>A指的是系数，α1α2……..则指的是x<sup>1</sup>x<sup>2</sup>……的指数，例如3x<sup>2</sup>y，A<sub>21</sub>&#x3D;3</p>
+<p>5.权重：数字在不同位置上自带的倍数</p>
+<p><strong>同余</strong></p>
+<p>tip：（括号里一般为得出结论的过程）</p>
+<p>定义：如果用正整数m去除任意两个整数a与b所得的余数相同，我们就说a,b对模m同余，记作a≡b(modm)</p>
+<p>性质：1.a≡b(modm)的充分必要条件是 m|(a-b)；证充分性：a-b可约去余数得到m*一堆东西；必要性：可知（a-b）&#x3D;m**一堆东西，没有余数，ab同余了</p>
+<pre><code>       2.若 a≡b(modm)，c≡d(modm)，则a+c≡b+d(modm)；可引申为
+</code></pre>
+<p>若a+b≡c（modm)，则通过两边同时加上（-b）可以得到a≡c-b（modm)</p>
+<pre><code>        3.若a&lt;sub&gt;1&lt;/sub&gt;≡b&lt;sub&gt;1&lt;/sub&gt;(modm ) a&lt;sub&gt;2&lt;/sub&gt;≡b&lt;sub&gt;2&lt;/sub&gt;(modm) ,（运用性质1可以得到a&lt;sub&gt;1&lt;/sub&gt;=b&lt;sub&gt;1&lt;/sub&gt;+mt&lt;sub&gt;1&lt;/sub&gt;,a&lt;sub&gt;2&lt;/sub&gt;=b&lt;sub&gt;2&lt;/sub&gt;+mt&lt;sub&gt;2&lt;/sub&gt;,a&lt;sub&gt;1&lt;/sub&gt;a&lt;sub&gt;2&lt;/sub&gt;=b&lt;sub&gt;1&lt;/sub&gt;b&lt;sub&gt;2&lt;/sub&gt;+m(.......),移项后a&lt;sub&gt;1&lt;/sub&gt;a&lt;sub&gt;2&lt;/sub&gt;-b&lt;sub&gt;1&lt;/sub&gt;b&lt;sub&gt;2&lt;/sub&gt;=m(......)再通过性质1）则a&lt;sub&gt;1&lt;/sub&gt;a&lt;sub&gt;2&lt;/sub&gt;≡b&lt;sub&gt;1&lt;/sub&gt;b&lt;sub&gt;2&lt;/sub&gt;(modm)；由此可以推广到若 a≡b(modm)，（在这里可以看作k个a相乘）则a&lt;sup&gt;k&lt;/sup&gt;≡b&lt;sup&gt;k&lt;/sup&gt;(modm)
+</code></pre>
+<p>由于k≡k(modm)的性质，若 a≡b(modm)，则<span data-type="text" style="white-space: normal">ak≡bk(modm)</span></p>
+<pre><code>         4.若A&lt;sub&gt;a1a2...ak&lt;/sub&gt;≡B&lt;sub&gt;a1a2...ak&lt;/sub&gt;（modm），x&lt;sub&gt;i&lt;/sub&gt;≡y&lt;sub&gt;i&lt;/sub&gt;（modm），i=1，2，...，k（先通过3的推广再通过3的“乘”最后通过2的加法累加）则Σ&lt;sub&gt;a1a2...ak&lt;/sub&gt;A&lt;sub&gt;a1a2...ak&lt;/sub&gt;x&lt;sub&gt;1&lt;/sub&gt;​&lt;sup&gt;a1&lt;/sup&gt;x&lt;sub&gt;2&lt;/sub&gt;​&lt;sup&gt;a2&lt;/sup&gt;...x&lt;sub&gt;k&lt;/sub&gt;​&lt;sup&gt;ak&lt;/sup&gt;≡Σ&lt;sub&gt;a1a2...ak&lt;/sub&gt;B&lt;sub&gt;a1a2...ak&lt;/sub&gt;y&lt;sub&gt;1&lt;/sub&gt;​&lt;sup&gt;a1&lt;/sup&gt;y&lt;sub&gt;2&lt;/sub&gt;​&lt;sup&gt;a2&lt;/sup&gt;...y&lt;sub&gt;k&lt;/sub&gt;​&lt;sup&gt;ak&lt;/sup&gt;（modm）；可推广至若 a&lt;sub&gt;i&lt;/sub&gt;≡b&lt;sub&gt;i&lt;/sub&gt;（modm）,i=0,1,...,n,（先“乘”，再加）则a&lt;sub&gt;n&lt;/sub&gt;x&lt;sup&gt;n&lt;/sup&gt;+a&lt;sub&gt;n-1&lt;/sub&gt;x&lt;sup&gt;n-1&lt;/sup&gt;+...+a&lt;sub&gt;0&lt;/sub&gt;≡b&lt;sub&gt;n&lt;/sub&gt;x&lt;sup&gt;n&lt;/sup&gt;+b&lt;sub&gt;n-1&lt;/sub&gt;x&lt;sup&gt;n-1&lt;/sup&gt;+...+b&lt;sub&gt;0&lt;/sub&gt;(modm)
+
+         5.若 a≡b(modm)且a=a&lt;sub&gt;1&lt;/sub&gt;d，b=b&lt;sub&gt;1&lt;/sub&gt;d，（d，m）=1（若不强调此点的话，则a&lt;sub&gt;1&lt;/sub&gt;≡b&lt;sub&gt;1&lt;/sub&gt;(mod一堆东西 )），（先通过性质1可得a-b=m**一堆东西=d（a*​*&lt;sub&gt;1&lt;/sub&gt;*​ *-b*​*&lt;sub&gt;1&lt;/sub&gt;*​ *），移项后a*​*&lt;sub&gt;1&lt;/sub&gt;*​ *-b*​*&lt;sub&gt;1&lt;/sub&gt;*​ *=m** 另一堆东西），则a&lt;sub&gt;1&lt;/sub&gt;≡b&lt;sub&gt;1&lt;/sub&gt;(modm )
+
+         6.若a≡b(modm)，k＞0，（简单代数运算）则ak≡bk(modmk)；若a≡b(modm)，d是a,b,m三者的任一正公因数(此处是为了保证a/d和b/d为整数)，（简单代数运算）则a/d≡b/d(modm/d)
+
+         7.若 a≡b(modm&lt;sub&gt;i&lt;/sub&gt;)，i=1，2，...，k，则若 a≡b(mod【m&lt;sub&gt;1&lt;/sub&gt;,m&lt;sub&gt;2&lt;/sub&gt;,...,m&lt;sub&gt;k&lt;/sub&gt;】)，此处可以用生活化的理解，12可以分成2份也分成3份，那也就可以通过在2份中把每一份再细分成3份的方法来分成6份
+
+          8.若a≡b(modm),d|m,d＞0，（m可以换成d*一些东西）则a≡b(modd)
+
+           9.若a≡b(modm)，（由性质1可得a-b=mt，设（b，m）=d，d|b，d|m，则a=d*一堆东西，d|a，那么（a，m）≥（b，m），设（a，m）=d&lt;sup&gt;，&lt;/sup&gt;，同理可得d&lt;sup&gt;，&lt;/sup&gt;|b，那么（a，m）≤（b，m），综上）则（a，m）=（b，m），若d能整除m及ab两数中的一个，则d必能整除ab中的另一个
+
+      引理1.一整数a能被3（或9）整除的充分必要条件是他的十进制数码的和能被3（或9）整除，证明：正整数a=a&lt;sub&gt;n&lt;/sub&gt;10&lt;sup&gt;n&lt;/sup&gt;+a&lt;sub&gt;n-1&lt;/sub&gt;10&lt;sup&gt;n-1&lt;/sup&gt;+...a&lt;sub&gt;0，&lt;/sub&gt;0≤a&lt;sub&gt;i&lt;/sub&gt;≤1000由于10≡1（mod3）以及性质4可得a=a&lt;sub&gt;n&lt;/sub&gt;10&lt;sup&gt;n&lt;/sup&gt;+a&lt;sub&gt;n-1&lt;/sub&gt;10&lt;sup&gt;n-1&lt;/sup&gt;+...a&lt;sub&gt;0&lt;/sub&gt;≡a&lt;sub&gt;n*&lt;/sub&gt;1&lt;sup&gt;n&lt;/sup&gt;+ a&lt;sub&gt;n-1&lt;/sub&gt;*1&lt;sup&gt;n-1&lt;/sup&gt;+...a&lt;sub&gt;0&lt;/sub&gt;=a&lt;sub&gt;n&lt;/sub&gt;+ a&lt;sub&gt;n-1&lt;/sub&gt;+...a&lt;sub&gt;0&lt;/sub&gt;（mod3），又因为a≡∑a&lt;sub&gt;i（&lt;/sub&gt;mod3），所以只要两者中有一个可以被3整除，则另一个也可以
+
+      引理2：一整数a=a&lt;sub&gt;n&lt;/sub&gt;1000&lt;sup&gt;n&lt;/sup&gt;+a&lt;sub&gt;n-1&lt;/sub&gt;1000&lt;sup&gt;n-1&lt;/sup&gt;+...a&lt;sub&gt;0，&lt;/sub&gt;0≤a&lt;sub&gt;n&lt;/sub&gt;≤1000，7（或11或13）整除a的充分必要条件是7（或11或13）整除 ∑（-1）&lt;sup&gt;n&lt;/sup&gt;a&lt;sub&gt;n&lt;/sub&gt;=（a&lt;sub&gt;0+&lt;/sub&gt;a&lt;sub&gt;2+...）&lt;/sub&gt;-（a&lt;sub&gt;1&lt;/sub&gt;+a&lt;sub&gt;3&lt;/sub&gt;+...）&lt;sub&gt;，&lt;/sub&gt;证明：已知1000≡-1（mod7），由性质4可得a=a&lt;sub&gt;n&lt;/sub&gt;1000&lt;sup&gt;n&lt;/sup&gt;+a&lt;sub&gt;n-1&lt;/sub&gt;1000&lt;sup&gt;n-1&lt;/sup&gt;+...a&lt;sub&gt;0&lt;/sub&gt;≡∑（-1）&lt;sup&gt;n&lt;/sup&gt;a&lt;sub&gt;n&lt;/sub&gt;（mod7），接下来与引理1同理，所以只要两者中有一个可以被3整除，则另一个也可以
+</code></pre>
+<p>（例题均为引理的应用示范，就不过多赘述了）</p>
+<pre><code>       弃九法：通过a的十进制之和与b的十进制之和的乘积 和P的十进制之和除9的余数是否相等来快速验证ab两数相乘得的积P是否正确（化繁为简）；
+</code></pre>
+<p>操作方法，首先将a，b，P三数化成十进制的形式a&#x3D;a<sub>n</sub>​<em>10</em>​*<sup>n</sup><em>​ <em>+a</em>​</em><sub>n-1</sub>*10<sup>n-1</sup>+…+a<sub>0，</sub>接着判断（Σa<sub>n</sub>）（Σb<sub>n</sub>）≡Σc<sub>n</sub>（mod9）是否成立（如果a<sub>n，</sub>b<sub>n，</sub>c<sub>n</sub>中存在9，因为都是加法所以可以直接忽略不计，不用累加），若成立则运算结果可能是对的（但存在偶然性），但若不成立运算结果则一定错误；</p>
+<p>原理，为了验证ab&#x3D;P，通过ab和P除9的余数是否相等来判断运算结果是否正确；由性质3（a≡Σa<sub>n</sub>（mod9）<sub>，</sub>b≡Σb<sub>n</sub>（mod9））得ab≡（Σa<sub>n</sub>）（Σb<sub>n</sub>）（mod9），P≡Σc<sub>n</sub>（mod9）；任何数除9的余数都等于此数各位上之和除9的余数（可以举例说明，也可以用同余证明：正整数a&#x3D;a<sub>n</sub>10<sup>n</sup>+a<sub>n-1</sub>10<sup>n-1</sup>+…a<sub>0，</sub>0≤a<sub>i</sub>≤1000由于10≡1（mod9）以及性质4可得a&#x3D;a<sub>n</sub>10<sup>n</sup>+a<sub>n-1</sub>10<sup>n-1</sup>+…a<sub>0</sub>≡a<sub>n*</sub>1<sup>n</sup>+ a<sub>n-1</sub>*1<sup>n-1</sup>+…a<sub>0</sub>&#x3D;a<sub>n</sub>+ a<sub>n-1</sub>+…a<sub>0</sub>（mod9）（这里类似引理1证明的前半部分））</p>
+<p>至于为什么是mod9，（据deep seek解释）第一是因为十进制中除9取余就等于该数（例11&#x3D;1*<em>10</em>​*<sup>1</sup><em>​ <em>+1</em></em> 10<sup>0</sup>，1÷9&#x3D;0…..1），再一个就是不论10的几次幂除9都等于1，计算方便</p>
+<pre><code>    课后习题解法：![联想截图_20260924222708](assets/联想截图_20260924222708-20260924222734-fdgy5ud.png)
+</code></pre>
+<p>2.解法同理引理2；</p>
+<p>（其实以下的题对我而言都有难度，最开始我做不出来，是问了deep seek才知道咋做的）</p>
+<p>3.此题类型类似“弃九法”，化繁为简；101：100&#x3D;101-1由性质1可得100≡（-1）（mod101），数字a&#x3D;a<sub>n</sub>100<sup>n</sup>+a<sub>n-1</sub>100<sup>n-1</sup>+…a<sub>0</sub>≡a<sub>n*</sub>（-1）<sup>n</sup>+ a<sub>n-1</sub>​ <em>（-1）</em>​*<sup>n-1</sup><em>​ <em>+…a</em>​</em><sub>0</sub><em>​ <em>&#x3D;a</em>​</em><sub>0</sub><em>​ <em>-a</em>​</em><sub>1</sub><em>​ <em>+a</em>​</em><sub>2</sub><em>​ <em>-a</em>​</em><sub>3</sub><em>​ <em>+….an&#x3D;偶数项和-奇数项和（mod101），也就是将数字a从右往左每两个数字一分隔，将偶数项和减奇数项和所得的差能被101整除则数字a可被101整除；37：因为1000&#x3D;37</em>27+1由性质1可得1000≡1（mod37），数字a&#x3D;a</em>​*<sub>n</sub><em>​</em>1000<em>​</em><sup>n</sup><em>​ <em>+a</em>​</em><sub>n-1</sub><em>​</em>1000<em>​</em><sup>n-1</sup><em>​ <em>+…a</em>​</em><sub>0</sub><em>​ <em>≡a</em>​</em><sub>n*</sub><em>​ <em>+ a</em>​</em><sub>n-1</sub><em>+…a<sub>0</sub>&#x3D;a<sub>0</sub>+a<sub>1</sub>+a<sub>2</sub>+a<sub>3</sub>+….+an，</em>也就是将数字a从右往左每三个数字一分隔，将各隔数字之和能被37整除则数字a可被37整除*</p>
+<p><strong>被整除判别条件类型题目做题方法总结</strong>：1.找出该数a与10<sup>n</sup>（需通过计算找出n具体为几）的关系；2.再通过性质1找到10<sup>n</sup>​ <em>≡1（moda），那就每n个数字一分隔</em>，求和看是否整除；若为10<sup>n</sup>​ <em>≡（-1）（moda）</em> ，则<em>那就每n个数字一分隔</em>，<em>偶数项和减奇数项和所得的差</em>看是否整除</p>
+<ol start="4">
+<li><p>思路是用性质1联想到a-b&#x3D;2<sup>32</sup>+1&#x3D;2<sup>32</sup>-（-1），，那么就视a&#x3D;2<sup>32</sup>b&#x3D;-1，那么只需证2<sup>32</sup>≡-1(mod641)，4就成立，但我想不到要怎么证明，就去寻找了ai的帮助：这里则通过凑数2<sup>7</sup>&#x3D;128，641&#x3D;128<em>5+1&#x3D;2</em>​*<sup>7</sup><em>​ *** 5+1，那么就可以</em>2<em>​</em><sup>7</sup><em>​ *** 5≡-1(mod641)①；得到接下来就是将幂‘7变成32即32&#x3D;7**4+4，再结合性质3的推广将①两侧都4次幂得到2</em>​*<sup>28</sup>*​ *** 5<sup>4</sup>≡1(mod641)②，这时候要把5<sup>4</sup>变化成2<sup>4</sup>，又因为5<sup>4</sup>&#x3D;625，2<sup>4</sup>&#x3D;16，641&#x3D;625+16，所以5<sup>4</sup>≡-2<sup>4</sup>(mod641)③，此时通过性质3的“乘”+<u><em>在同余中，两数同余可以在加法或乘法中替换</em></u>将②③式变化为-2<sup>32</sup>≡1(mod641)，再通过性质3的推广两边同“乘”-1可得2<sup>32</sup>≡-1(mod641)</p>
+</li>
+<li><p>这个题目是<sub>a</sub>2<sup>n</sup>，（运算也是很奇妙了），我的想法原本是a为奇数，<sub>a</sub>2<sup>n</sup>也为奇数，<sub>a</sub>2<sup>n</sup>-1为偶数，2<sup>n+2</sup>也为偶数，但显然这不能完成题目；在ai的帮助下，才知道可以用数学归纳法，a&#x3D;1时成立，假设n&#x3D;k时成立<sub>a</sub>2<sup>k</sup>​ <em>-1&#x3D;</em> 2<sup>k+2</sup>​<em>t①，若n&#x3D;k+1时，需证2</em>​ <em><sup>（k+1）+2</sup><em>​ <em>|<em>​</em><sub>a</sub><em>​</em>2</em>​ <em><sup>（k+1）</sup><em>​ <em>-1即证</em>​</em><sub>a</sub><em>​</em>2</em>​ <em><sup>（k+1）</sup><em>​ <em>-1&#x3D;2</em>​</em><sup>k+3</sup><em>​</em>q②，q存在且为整数，接下来就是带入变形（这里有点难度，又卡住了），</em>​</em><sub>a</sub><em>​</em>2</em>​ <em><sup>（k+1）</sup><em>​ <em>-1变成</em>​</em><sub>a</sub><em>​</em>2</em>​*<sup>k</sup><em>​ *<em>2-1&#x3D;（</em>​*<sub>a</sub><em>​</em>2</em>​*<sup>k</sup><em>​ <em>）</em>​</em><sup>2</sup><em>​ <em>-1&#x3D;（</em>​</em><sub>a</sub><em>​</em>2<em>​</em><sup>k</sup><em>​ <em>+1）（</em>​</em><sub>a</sub><em>​</em>2<em>​</em><sup>k</sup><em>​ <em>-1），这个时候将①带入，②就变形为（</em>​</em><sub>a</sub><em>​</em>2<em>​</em><sup>k</sup><em>​ <em>+1）</em>2</em>​*<sup>k+2</sup><em>​</em>t&#x3D;2<em>​</em><sup>k+3</sup><em>q，在进行约分得 <em>（</em>​</em><sub>a</sub><em>​</em>2<em>​</em><sup>k</sup><em>​ <em>+1）t&#x3D;2</em>q③，又因为</em><sub>a</sub><em>​</em>2<em>​</em><sup>k</sup><em>​ <em>+1</em>为偶数，此时③变形为q&#x3D;t</em>整数，此时可以说明q是存在的，证毕。（但其实感觉这道题跟同余关系不大。。。。。</p>
+</li>
+<li><p>题目中标准分解式是质数的次方相乘，检查因数的方法则是用最小的质数挨个除，看是否能够除尽，所以题目的意思的将数字化解为质数相乘的形式，结合所学，</p>
+</li>
+</ol>
+<p><strong>求标准分解式类型做题方法总结</strong>就是先能否用2，5除，再用引理看能否用3，9，7，11，13除或者别的数</p>
+<p>‍</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ditou-school-xiang.github.io">ditou-school-xiang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ditou-school-xiang.github.io/post/elementary-number-theory-2gakbi.html">https://ditou-school-xiang.github.io/post/elementary-number-theory-2gakbi.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ditou-school-xiang.github.io" target="_blank">我的博客</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/09/12/the-new-start/" title="全新的开始"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">全新的开始</div></div><div class="info-2"><div class="info-item-1">全新的开始blog的安装 为了速度更迅捷，使用的是hugo+go 在Github使用过程中，除了部分英文看不懂（阅读有困难），还有就是在安装主题的时候一直报错，卡了很久，豆包这时候就跟逗人玩一样，一会改这个，说这个没有问题了，一会又说还有一点问题，希望自己能够快点进化，看懂错误，别再受制于“豆包”了吧。 其实当时进行到这里，我已经很激动了，觉得未来一片光明，后来发现，那可能是光明顶。。。。。。 后来又发现pages读取的分支和放网页的分支不匹配（咬牙切齿的继续改 docker 在这里学到的第一点就是科学上网，哈哈哈哈哈，面试的时候还在想要机场干什么，没想到现在就真香了 本来以为下载好再跟着操作走就万事大吉了，哎~~，又出现问题了， 这个时候又弹出来这个，一劫又一劫，那我就安装呗， 在下载wsl的过程中 又出现问题了。。。。。。。。无法连接服务器（我已经用了流量+梯子），403禁止，旧版内核和新版win11不兼容 在我再三考虑+豆包的劝导，询问学长后，可以不用dockers，只要能跑得起来就行，豆包就开始出主意了，说这样跟着他走肯定没问题（现在回头看来，豆包，你个不靠谱的！！！！！...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">ditou-school-xiang</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E7%AD%89%E6%95%B0%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">初等数论</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/elementary-number-theory-2gakbi.html" title="初等数论">初等数论</a><time datetime="2026-09-19T12:57:15.000Z" title="发表于 2026-09-19 20:57:15">2026-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/12/the-new-start/" title="全新的开始">全新的开始</a><time datetime="2026-09-12T09:30:00.000Z" title="发表于 2026-09-12 17:30:00">2026-09-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/11/hello/" title="我的第一篇博客">我的第一篇博客</a><time datetime="2026-09-11T11:30:00.000Z" title="发表于 2026-09-11 19:30:00">2026-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By ditou-school-xiang</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
