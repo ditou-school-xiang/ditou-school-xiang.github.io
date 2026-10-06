@@ -1,0 +1,4 @@
+#开启数学公式渲染
+mathjax:
+  enable : true
+  per_page : false
