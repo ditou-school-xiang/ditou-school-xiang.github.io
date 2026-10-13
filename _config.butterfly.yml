@@ -4,7 +4,7 @@ math:
   # 选用 katex 引擎，比 mathjax 稳定
   engine: katex
   # 是否在每个页面都渲染
-  per_page: false
+  per_page: true
 
 # 引入 katex 的样式和脚本 (这是必须的，否则还是认不出公式)
 inject:
